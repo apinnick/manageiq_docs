@@ -311,7 +311,7 @@ include::common/configuration-register-appliance.adoc[]
 
 [NOTE]
 ====
-To update your appliances, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/migrating_to_red_hat_cloudforms_4.6/[Updating {product-title}] in _Migrating to {product-title} 4.6_.
+To update your appliances, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/migrating_to_red_hat_cloudforms_4.7-Beta/[Updating {product-title}] in _Migrating to {product-title} 4.7-Beta_.
 ====
 
 [[subscription-management-for-virtual-environments]]
@@ -593,10 +593,11 @@ These roles are enabled by default on all servers.
 |Capacity & Utilization Data Collector|The Capacity & Utilization Data Collector performs the actual collection of capacity and utilization data. This role has a dedicated worker, and there can be more than one {product-title_short} server with this role in a zone.|Zone|Active/Active
 |Capacity & Utilization Data Processor|The Capacity & Utilization Data Processor processes all of the data collected, allowing {product-title_short} to create charts. This role has a dedicated worker, and there can be more than one {product-title_short} server with this role in a zone.|Zone|Active/Active
 |Database Operations|Use Database Operations to enable this {product-title_short} server to run database backups or garbage collection.|Zone|Active/Active
+|Embedded Ansible|This role is disabled by default. The Embedded Ansible role supports Ansible Automation Inside functionality. Enable this role to configure playbook repositories and run playbooks natively to back service catalog items. *NOTE*: Enable the Provider Inventory server role in the same zone as the Embedded Ansible server role to ensure proper functionality. |Region|Primary/Secondary
 |Event Monitor|This role is enabled by default and provides the information shown in timelines. The Event Monitor is responsible for the work between the {product-title_short} server and your providers. It starts 2 workers for each provider. One worker, the monitor, is responsible for maintaining a connection to a provider, catching events, and putting them on the {product-title_short} message queue for processing. The second worker, the handler, is a message queue worker responsible for delivering only those messages for a provider. You should have at least one of these in each zone.|Zone|Primary/Secondary
 |Git Repository|The Git Repositories Owner server role supports importing domains into automate from a git repository. This feature is available from the Automate > Import/Export screen in the {product-title_short} user interface.|Region|Primary/Secondary
 |Notifier|Use this role if you will be using {product-title_short} Control or Automate to forward SNMP traps to a monitoring system or send e-mails. See <<Configuring SNMP>> for details on creating SNMP alerts. If more than one {product-title_short} server in a specific region has this role, only one will be active at a time.|Region|Primary/Secondary
-|Provider Inventory|This role is enabled by default. This role is responsible for refreshing provider information including EMS, hosts, virtual machines, and clusters, and is also responsible for capturing datastore file lists. If more than one {product-title_short} server in a specific zone has this role, only one will be active at a time.|Zone|Primary/Secondary
+|Provider Inventory|This role is enabled by default. This role is responsible for refreshing provider information including EMS, hosts, virtual machines, and clusters, and is also responsible for capturing datastore file lists. If more than one {product-title_short} server in a specific zone has this role, only one will be active at a time. Required in the same zone as a {product-title_short} appliance with the Embedded Ansible role enabled.|Zone|Primary/Secondary
 |Provider Operations|This role is enabled by default. This role sends stop, start, suspend, shutdown guest, clone, reconfigure, and unregister to the provider, directly from the console or through a policy action if you have {product-title_short} Control. More than one {product-title_short} server can have this role in a zone.|Zone|Active/Active
 |RHN Mirror|An appliance with RHN Mirror enabled acts as a server containing a repository with the latest {product-title_short} packages. This also configures other appliances within the same region to point to the chosen RHN Mirror server for updates. This provides a low bandwidth method to update environments with multiple appliances.|N/A|Active/Active
 |Reporting|This role is enabled by default. The Reporting role specifies which {product-title_short} servers can generate reports. If you do not have a {product-title_short} server set to this role in a zone, then no reports can be generated in that zone. You should have at least one of these in each zone.|Zone|Active/Active
@@ -612,7 +613,7 @@ These roles are enabled by default on all servers.
 [[vmware-console-settings]]
 ====== VMware Console Settings
 
-If you are using the {product-title} control feature set, then you have the ability to connect to a Web console for virtual machines that are registered to a host. To use this feature, you must have VNC installed, link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/managing_infrastructure_and_inventory/sect_virtual_machines#vnc_and_spice_consoles[VMware's WebMKS SDK enabled in {product-title_short}], or the VMRC native desktop application installed for your environment.
+If you are using the {product-title} control feature set, then you have the ability to connect to a Web console for virtual machines that are registered to a host. To use this feature, you must have VNC installed, link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html/managing_infrastructure_and_inventory/sect_virtual_machines#vnc_and_spice_consoles[VMware's WebMKS SDK enabled in {product-title_short}], or the VMRC native desktop application installed for your environment.
 
 [NOTE]
 ======
@@ -733,7 +734,7 @@ Use the *Authentication* tab to specify how you want users authenticated on the 
 ifdef::cfme[]
 [NOTE]
 ====
-See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_authentication_for_cloudforms/[_Managing Authentication_] for information on configuring different types of authentication for {product-title_short}.
+See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/managing_authentication_for_cloudforms/[_Managing Authentication_] for information on configuring different types of authentication for {product-title_short}.
 ====
 endif::cfme[]
 
@@ -761,7 +762,7 @@ To change authentication settings:
 
 ////
 
-Note: commenting all of this content out as it's now in the Managing Authentication guide. Leaving in this guide temporarily in case it is needed for any reason. All xrefs to this section have been changed to URLs to the new guide. We can probably delete this content entirely after 4.6 is released.
+Note: commenting all of this content out as it's now in the Managing Authentication guide. Leaving in this guide temporarily in case it is needed for any reason. All xrefs to this section have been changed to URLs to the new guide. We can probably delete this content entirely after 4.7-Beta is released.
 
 [[ldap_settings]]
 ====== Configuring LDAP Authentication
@@ -1141,7 +1142,7 @@ The current SAML implementation only secures the {product-title_short} appliance
 
 The following is required in order to enable SAML authentication to the appliance:
 
-* A CloudForms 4.6 appliance
+* A CloudForms 4.7-Beta appliance
 * A SAML identity provider (e.g. Red Hat Single Sign-On (SSO) 7.0 or later)
 
 [[configure-apache-SAML]]
@@ -1223,7 +1224,7 @@ To add a client in the Red Hat SSO {product-title_short} realm:
   http://<redhatSSO-server>:8080/auth/realms/<miq-realm>/protocol/saml/descriptor
 ------
 +
-. In CloudForms 4.6, the following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
+. The following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
 +
 ------
 # vi idp-metadata.xml
@@ -1495,13 +1496,14 @@ image:use-configuration-settings.png[]
 [[advanced-settings]]
 ===== Advanced Settings
 
-You may be instructed by Red Hat to edit some configuration settings manually. This feature is available for a limited number of options and can only be used by users assigned the super administrator role. Changing
-settings using this procedure may disable your {product-title} server.
+You may be instructed by Red Hat to edit some configuration settings manually. This feature is available for a limited number of options and can only be used by users assigned the super administrator role. Changing settings using this procedure may disable your {product-title_short} server.
 
-[NOTE]
-=========
-Only make manual changes to your configuration files if directed to do so by Red Hat.
-=========
+[IMPORTANT]
+====
+* Only make manual changes to your configuration files if directed to do so by Red Hat.
+
+* {product-title_short} provides the ability to edit advanced configuration settings for all appliances through the *Advanced* tab from the user interface. You can also specify advanced settings for entire zones by clicking the *Advanced* tab at the zone level, with the advanced settings applied to individual appliances in that zone overriding zone-level settings when set.
+====
 
 [[editing-configuration-files-manually]]
 ====== Editing Configuration Files Manually
@@ -1511,10 +1513,8 @@ To edit configuration files manually:
 . From the settings menu, click *Configuration*.
 . Click on the *Settings* accordion, then click *Zones*.
 . Click the zone where the server is located.
-. Click on the server.
-. Click the *Advanced* tab.
-. Select the configuration file to edit from the *Configuration File to Edit* area.
-. Make the required changes.
+. You can click the *Advanced* tab at the zone level to set advanced configuration settings for the entire zone. Or, you can click on the server, and then click the *Advanced* tab to set advanced configuration settings at the server (appliance) level, which will override zone-level settings.
+. Make the required changes to the configuration file.
 . Click *Save*.
 
 
@@ -1607,9 +1607,7 @@ Table: db_stats
 |=======================================================================
 
 
-Table 3.7. callsites
-
-Table: log
+Table: callsites
 
 [width="100%",cols="30%,70%",options="header",]
 |=======================================================================
@@ -1622,7 +1620,7 @@ Table: log
 |=======================================================================
 
 
-Table 3.8. collection
+Table: collection
 
 [width="100%",cols="30%,70%",options="header",]
 |=======================================================================
@@ -1663,7 +1661,7 @@ VERSION
 |=======================================================================
 
 
-Table 3.9. log_depot
+Table: log_depot
 
 [width="100%",cols="30%,70%",options="header",]
 |=======================================================================
@@ -1699,7 +1697,7 @@ Table: performance
 |purge_window_size|When the purge needs to delete rows which are older than the keep_realtime_performances, keep_hourly_performances, and keep_daily_performances values, this value sets how many rows to delete in each batch. For example, a value of 1000 will cause us to issue ten 1,000 row deletes. Default: 1000
 |=======================================================================
 
-Table 3.11. repository_scanning
+Table: repository_scanning
 
 [width="100%",cols="30%,70%",options="header",]
 |=======================================================================
@@ -1707,7 +1705,7 @@ Table 3.11. repository_scanning
 |defaultsmartproxy|Specify the SmartProxy for repository scanning. This is the same as Default Repository Smartproxy in Configuration-Operations- Server-VM Server Control in the appliance console. Default: blank
 |=======================================================================
 
-Table 3.12. server
+Table: server
 
 [width="100%",cols="30%,70%",options="header",]
 |=======================================================================
@@ -1763,7 +1761,7 @@ Table: smartproxy_deploy
 |queue_timeout|Timeout for host smartproxy deploy job. Default: 30.minutes
 |=======================================================================
 
-Table 3.15. smtp
+Table: smtp
 
 [width="100%",cols="30%,70%",options="header",]
 |=======================================================================
@@ -1778,7 +1776,7 @@ Table 3.15. smtp
 |=======================================================================
 
 
-Table 3.16. snapshots
+Table: snapshots
 
 [width="100%",cols="30%,70%",options="header",]
 |=======================================================================
@@ -1788,7 +1786,7 @@ Table 3.16. snapshots
 |=======================================================================
 
 
-Table 3.17. webservices
+Table: webservices
 
 [width="100%",cols="30%,70%",options="header",]
 |=======================================================================
@@ -2028,7 +2026,7 @@ From the settings menu, select *Configuration*. Click on the *Access Control* ac
 ifdef::cfme[]
 [NOTE]
 ====
-For information about tenancy in {product-title_short}, and the difference between a tenant and project, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/deployment_planning_guide/#tenants[Tenancy] in the _Deployment Planning Guide_.
+For information about tenancy in {product-title_short}, and the difference between a tenant and project, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/deployment_planning_guide/#tenants[Tenancy] in the _Deployment Planning Guide_.
 ====
 endif::cfme[]
 
@@ -2103,7 +2101,7 @@ image:available_groups.png[]
 * If you are using LDAP, but did not enable *Get User Groups from LDAP* in your server's *Authentication* tab, you will need to define a user. The UserID must match exactly the user's name as defined in your directory service. Use all lowercase characters to ensure the user can be found in the VMDB.
 * When the user logs in, they use their LDAP password.
 ifdef::cfme[]
-* For more information on configuring LDAP authentication in {product-title_short}, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_authentication_for_cloudforms/#ldap_config[Configuring LDAP or LDAPS Authentication] in _Managing Authentication_.
+* For more information on configuring LDAP authentication in {product-title_short}, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/managing_authentication_for_cloudforms/#ldap_config[Configuring LDAP or LDAPS Authentication] in _Managing Authentication_.
 endif::cfme[]
 ifdef::miq[]
 For more information on configuring LDAP authentication in {product-title_short}, see _Configuring LDAP or LDAPS Authentication_ in _Managing Authentication_.
@@ -2136,7 +2134,7 @@ A user can exist in multiple groups. However, a group can only be assigned one a
 ifdef::cfme[]
 [NOTE]
 ====
-See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_authentication_for_cloudforms/#assigning_account_roles_using_ldap_groups[Assigning CloudForms Account Roles Using LDAP Groups] in _Managing Authentication_.
+See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/managing_authentication_for_cloudforms/#assigning_account_roles_using_ldap_groups[Assigning CloudForms Account Roles Using LDAP Groups] in _Managing Authentication_.
 ====
 endif::cfme[]
 
@@ -2192,7 +2190,7 @@ image:CloudForms_General_Config_Roles_460469_1017_JCS.png[]
 ====
 If you have enabled *Get Role from LDAP* under *LDAP Settings*, then the role is determined by the LDAP user's group membership in the directory service. 
 ifdef::cfme[]
-See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_authentication_for_cloudforms/#ldap_config[Configuring LDAP or LDAPS Authentication] in _Managing Authentication_.
+See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/managing_authentication_for_cloudforms/#ldap_config[Configuring LDAP or LDAPS Authentication] in _Managing Authentication_.
 endif::cfme[]
 ifdef::miq[]
 See _Configuring LDAP or LDAPS Authentication_ in _Managing Authentication_.
@@ -2794,7 +2792,7 @@ Once you configure a {product-title} instance to act as a global copy, and one o
 Database replication and centralized administration are now enabled on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy.
 
 ifdef::cfme[]
-See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/deployment_planning_guide/#central-administration[Deployment Planning Guide] for an overview of the feature.
+See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/deployment_planning_guide/#central-administration[Deployment Planning Guide] for an overview of the feature.
 endif::cfme[]
 
 [[resetting-database-replication]]
@@ -3065,7 +3063,7 @@ To change the password for an external database, use the procedure in xref:chang
 
 [NOTE]
 ====
-See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/deployment_planning_guide/#appliance-types[Appliance Types] in the _Deployment Planning Guide_ for a summary of different types of appliances.
+See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/deployment_planning_guide/#appliance-types[Appliance Types] in the _Deployment Planning Guide_ for a summary of different types of appliances.
 ====
 
 
@@ -3200,4 +3198,5 @@ The next options depend on the periodic database maintenance frequency you choos
 To reset your database maintenance settings, enter *Configure Database Maintenance* again from the appliance console menu, and confirm that you want to unconfigure the settings in the configuration dialog. This deletes the current settings.
 
 To configure a new database maintenance schedule, enter the *Configure Database Maintenance* menu item once again and configure the values using the dialog.
+
 
